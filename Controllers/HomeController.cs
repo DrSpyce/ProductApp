@@ -7,14 +7,10 @@ namespace WebApplication1.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
         private ApplicationDbContext _db;
 
-        public HomeController(ILogger<HomeController> logger,
-            ApplicationDbContext context)
+        public HomeController(ApplicationDbContext context)
         {
-            _logger = logger;
             _db = context;
         }
 
@@ -30,7 +26,22 @@ namespace WebApplication1.Controllers
 
         public IActionResult Products()
         {
-            var products = _db.Product!.ToList();
+            var products = _db.Product!.OrderBy(a => a.TypeOfProduct).ThenBy(a => a.NumberName)
+                .ToList();
+            return View(products);
+        }
+
+        public IActionResult ProductsCrumble()
+        {
+            var products = _db.Product!.Where(a => a.TypeOfProduct == TypesOfProduct.Crumble)
+                .OrderBy(a => a.NumberName).ToList();
+            return View(products);
+        }
+
+        public IActionResult ProductsMarble()
+        {
+            var products = _db.Product!.Where(a => a.TypeOfProduct == TypesOfProduct.Marble)
+                .OrderBy(a => a.NumberName).ToList();
             return View(products);
         }
 

@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="~/StonesProject.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header id="header" class="header fixed-top d-flex align-items-center">
+    <header id="header" class="header fixed-top d-flex align-items-center gy-3">
         <div class="container d-flex align-items-center justify-content-between">
             <a class="logo d-flex align-items-center me-auto me-lg-0" asp-area="" asp-controller="Home" asp-action="Index">
                 <h1>Gelemar</h1>
@@ -25,13 +25,17 @@
             <nav id="navbar" class="navbar">
                 <ul>
                     <li>
-                        <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        <a asp-area="" asp-controller="Home" asp-action="Index">Главная</a>
+                    </li>
+                    <li class ="dropdown">
+                        <a asp-area="" asp-controller="Home" asp-action="Products">Каталог <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                        <ul>
+                            <li><a asp-area="" asp-controller="Home" asp-action="ProductsCrumble">Крошка</a></li>
+                            <li><a asp-area="" asp-controller="Home" asp-action="ProductsMarble">Камень</a></li>
+                        </ul>
                     </li>
                     <li>
                         <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                    </li>
-                    <li>
-                        <a asp-area="" asp-controller="Home" asp-action="Products">Products</a>
                     </li>
 
                 </ul>

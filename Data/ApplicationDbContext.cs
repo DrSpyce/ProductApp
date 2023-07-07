@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 using WebApplication1.Models;
 
 namespace WebApplication1.Data
@@ -10,6 +11,13 @@ namespace WebApplication1.Data
             : base(options)
         {
         }
+
         public DbSet<ProductModel>? Product { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Entity<ProductModel>().HasIndex(p => p.ShownName).IsUnique();
+        }
     }
 }
