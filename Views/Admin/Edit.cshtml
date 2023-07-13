@@ -1,0 +1,42 @@
+﻿@using WebApplication1.Models;
+@model ProductModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Изменить</h1>
+
+<h4>Продукт</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditPost" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id" />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NumberName" class="control-label">Номер</label>
+                <input asp-for="NumberName" class="form-control" value="@Model.NumberName"/>
+                <span asp-validation-for="NumberName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label">Цена</label>
+                <input asp-for="Price" class="form-control" value="@Model.Price"/>
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TypeOfProduct" class="control-label">Тип продукта</label>
+                <select asp-for="TypeOfProduct" class="form-control" asp-items="Html.GetEnumSelectList<TypesOfProduct>()" ></select>
+                <span asp-validation-for="TypeOfProduct" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-5">
+                <input type="submit" value="Изменить" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

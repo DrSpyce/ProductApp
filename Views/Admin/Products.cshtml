@@ -1,0 +1,42 @@
+﻿@model List<ProductModel>
+@{
+    ViewData["Title"] = "Каталог";
+}
+
+@if (ViewData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+       Ошибка: @ViewData["ErrorMessage"]
+       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="row bg-body justify-content-center">
+    <div class="m-2 d-flex justify-content-center">
+        <a class="btn btn-secondary me-3" asp-area="" asp-controller="Admin" asp-action="Create">Создать</a>
+        <a class="btn btn-secondary me-3" asp-area="" asp-controller="Admin" asp-action="Products" asp-route-type="@TypesOfProduct.Crumble">Крошка</a>
+        <a class="btn btn-secondary" asp-area="" asp-controller="Admin" asp-action="Products" asp-route-type="@TypesOfProduct.Marble">Камень</a>
+    </div>
+</div>
+
+<div class="row align-items-center justify-content-center">
+    @foreach(var product in Model)
+    {
+        <div class="card m-1 p-0 bg-light" style="width: 15rem;">
+            <img src="@product.ImageUrl" class="card-img-top" alt="https://fakeimg.pl/300x300/ff0000/">
+            <div class="card-body justify-content-center d-flex pb-0">
+                <p class="card-text text-center">@product.ShownName</p>
+            </div>
+            <div class="card-body justify-content-center d-flex pt-0">
+                <div>
+                    <a asp-controller="Admin" asp-action="Edit" asp-route-id="@product.Id" class="card-link m-2 btn btn-primary">Изменить</a>
+                </div>
+                <div>
+                    <form asp-controller="Admin" asp-action="DeleteProduct" asp-route-id="@product.Id">
+                        <input class="card-link m-2 btn btn-danger" type="submit" value="Удалить">
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+</div>
